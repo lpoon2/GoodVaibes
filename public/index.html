@@ -9,22 +9,26 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-<body ng-app="mp3">
-
-    <!-- <div ng-view></div> -->
-
-    <!-- DELETE following div and UNCOMMENT the previous one -->
-    <div class="row text-center">
-        <h1>Welcome to MP3!</h1>
-        <img src="http://lorempixel.com/400/200/cats"/>
-        <p> The installation and setup worked out for you. That is commendable.
-            To reward you for your efforts, here is a picture of a cat. However,
-            this is not the page you want. To get started on using your partials,
-            delete this particular div and, instead, uncomment the div given
-            in your index.html and implement your Angular routes in source_js/app.js .
-        </p>
+<body ng-app="mp3" background="./data/back.jpg">
+<header>
+  <div class="top-bar sticky" id="nav" style="top:0px">
+    <div class="top-bar-center">
+      <ul class="menu vertical medium-horizontal data-magellan">
+        <li><a id="1" href="partials/list.html">List</a></li>
+        <li><a id="2" href="partials/gallery.html">Gallery</a></li>
+        <li><a id="3" href="partials/details.html?rank=1">Details</a></li>
+      </ul>
     </div>
-
+  </div>
+</header>
+<section>
+  <div align = "center" style="padding-top:30px">
+  <img src="./data/back.jpg">
+</div>
+<div align="center" style="padding-top:10px">
+<a href="partials/list.html" class="button">Enter!</a>
+</div>
+</section>
     <!-- Angular Scripts -->
     <!-- NOTE: removing the ".min." can help debugging in the console-->
     <script src="./lib/angular/angular.min.js"></script>
@@ -37,7 +41,9 @@
     <script src="./lib/foundation-sites/dist/foundation.min.js"></script>
     <script src="./js/script.js"></script>
     <script>
+    $(document).ready(function() {
     $(document).foundation();
+});
     </script>
     <script src="http://localhost:35729/livereload.js"></script>
 </body>
