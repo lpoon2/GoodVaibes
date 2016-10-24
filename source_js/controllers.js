@@ -1,6 +1,8 @@
+var squel = require('squel');
 app.controller('listController', ['$scope', '$http','$filter','myService', function($scope, $http,$filter,myService) {
   $scope.infos={};
   $scope.details={};
+  //////////////////mp3
   $http.get('../data/imdb250.json')
       .success(function(data) {
           $scope.infos = data;
@@ -15,6 +17,24 @@ app.controller('listController', ['$scope', '$http','$filter','myService', funct
     window.top.location = "details.html"+ '?rank='+ found.rank;
   //  myService.set(found);
   }
+  /////////////////mp3
+  var insert = function(sql){
+con.query(sql, function(err, rows){
+                if(err) throw err;
+});
+}
+   $scope.song_insert = function(name){
+    wtf_wikipedia.from_api(name, function(page) {
+    var parsed = wtf_wikipedia.parse(page); // causes the crash
+
+          var shit = squel.insert().into('Song').set('title',parsed.infobox.Name.text)
+                                   .set('genre',parsed.infobox.Genre.text).set('record_label', parsed.infobox.Label.text)
+                                         .toString();
+                      insert(shit);
+
+                  });
+  }
+
 }]);
 
 app.controller('detailsController', ['$scope', '$http','$filter','myService', function($scope, $http,$filter,myService) {
