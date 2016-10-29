@@ -1,5 +1,5 @@
 {
-  "name": "mp3_starter",
+  "name": "lpoon2",
   "version": "2.0.0",
   "homepage": "https://github.com/uiuc-web-programming/mp3_starter",
   "authors": [
@@ -16,6 +16,25 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-copy": "^0.1.0",
     "grunt-express-server": "^0.4.19",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "ruby": "^0.6.1"
+  },
+  "description": "## Setup Use the following commands in your vagrant development environment to get this up and running ```bash git clone --bare https://github.com/uiuc-web-programming/mp3_starter.git cd mp3_starter.git git push --mirror https://github.com/your-github-username/mp3.git # Mirror-push to your mp3 repository. Use your github username in the URL. Change the URL if you're using bitbucket. cd .. rm -rf mp3_starter.git",
+  "main": "app.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpoon2/GoodVaibes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lpoon2/GoodVaibes/issues"
   }
 }
