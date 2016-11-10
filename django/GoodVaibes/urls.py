@@ -16,21 +16,22 @@ Including another URLconf
 from django.conf.urls import url, include 
 from django.contrib import admin
 #from tastypie.api import Api
-from gvai.api import SongResource
+
 from gvai import views
 from rest_framework import routers
-
+from django.views.generic import RedirectView
 #router = routers.DefaultRouter()
 #router.register(r'songs', views.SongViewSet)
-
+import gvai
 urlpatterns = [
    url(r'^admin/', admin.site.urls),
-   url(r'^$', views.index),
+   url(r'^$', include("gvai.urls")),
   # url(r'^', include(router.urls)), 
-   url(r'^songs/$', views.SongViewSet.as_view()), 
-   url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+   url(r'^songs', views.SongViewSet.as_view()), 
+  # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 #v1_api.urls = patterns('',)
 ]
+
 
 
 

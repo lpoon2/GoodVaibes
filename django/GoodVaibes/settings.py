@@ -38,13 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gvai',
-    'rest_framework', 
+    #'rest_framework', 
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGE_SIZE': 10
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
