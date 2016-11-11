@@ -47,6 +47,7 @@ REST_FRAMEWORK = {
 }
 
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'GoodVaibes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/lpoon2/GoodVaibes/django/gvai/web_frame'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
+
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
@@ -130,3 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+

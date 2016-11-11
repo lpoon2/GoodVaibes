@@ -15,7 +15,7 @@
         <input ng-model="song.genre">
       </md-input-container>
       <md-input-container>
-        <label>Assigned User Name</label>
+        <label>Language</label>
         <input ng-model="song.language">
       </md-input-container>
 
@@ -28,7 +28,7 @@
 
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex-gt-xs>
-            <label>Description</label>
+            <label>Record label</label>
             <input ng-model="song.record_label">
           </md-input-container>
 
@@ -47,15 +47,15 @@
 
 </div>
 <md-toolbar md-scroll-shrink>
-  <div class="md-toolbar-tools">All Tasks</div>
+  <div class="md-toolbar-tools">Songs</div>
 </md-toolbar>
 <md-content>
    <md-list flex>
 <md-list-item class="md-3-line" ng-repeat="thing in things">
     <div class="md-list-item-text" layout="column">
-      <h3>{{ thing.title }}</h3>
-      <h4  flex-gt-sm>{{ thing.genre }}</h4>
-      <p>{{ thing.record_label }}</p>
+      <h3> {{thing.fields.title}}</h3>
+      <h4  flex-gt-sm>{{ thing.fields.genre }}</h4>
+      <p>{{ thing.fields.record_label }}</p>
     </div>
 </md-list-item>
  </md-list>

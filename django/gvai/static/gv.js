@@ -3,13 +3,13 @@ var app = angular.module('goodvai', ['ngRoute', 'gvControllers', 'gvServices']);
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/songs', {
-    templateUrl: './partials/songList.html',
+    templateUrl: '/static/songList.html',
     controller: 'songController'
   }).
   when('/', {
-    templateUrl: 'main.html',
-B
-    controller: 'mainController'
+    templateUrl: '/static/partials/songList.html',
+
+    controller: 'songController'
   }).
   otherwise({
     redirectTo: '/'
@@ -24,17 +24,16 @@ gvServices.factory("CommonData",function(){
 
     setData:function(newData){data=newData}}}),
 
-//A
 //var gvServices=angular.module("gvServices",[]);
 gvServices.factory("Vai",function($http,$window){
-  var baseUrl="fa16-cs411-25.cs.illinois.edu:8000"
+  var baseUrl="http://fa16-cs411-25.cs.illinois.edu:8000"
   return{
     get_all:function(){
-      return $http.get(baseUrl+"/songs");
+      return $http.get(baseUrl+"/api/songs");
     },
     post_song: function(data){
 
-      return $http.post(baseUrl+"/songs", data);
+      return $http.post(baseUrl+"/api/songs", data);
     },
     get_one:function(id){
       return $http.get(baseUrl+"/api/users/"+id);

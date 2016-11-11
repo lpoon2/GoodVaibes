@@ -9,8 +9,18 @@ from django.http import Http404
 from django.views import View
 from django.core import serializers
 import json
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.utils.decorators import method_decorator
+from django.views.generic.base import TemplateView
 def index(request):
-    return render(request, "main.html") 
+    return render(request, "main.html", {"name": "hi"}) 
+
+class IndexView(TemplateView):
+	template_name ='main.html'
+
+    	@method_decorator(ensure_csrf_cookie)
+    	def dispatch(self, *args, **kwargs):
+        	return super(IndexView, self).dispatch(*args, **kwargs)
 
 class SongViewSet(View):
 	def get(self, request, format=None):

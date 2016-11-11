@@ -1,11 +1,13 @@
 var gvControllers = angular.module('gvControllers', ['ngMaterial']);
 
-gvControllers.controller('songController', ['$scope', 'CommonData','Vai' , function($scope, CommonData,Vai) {
+gvControllers.controller('songController', ['$scope','$window','CommonData','Vai' , function($scope,$window, CommonData,Vai) {
   $scope.things = {}
     $scope.data = CommonData.getData();
+	console.log("please show"); 	    
     Vai.get_all()
     .success(function(data){
-      $scope.things = data.data;
+    	  console.log(data[0].fields.title); 
+	  $scope.things = data;
     });
     
     $scope.song = {
@@ -14,12 +16,17 @@ gvControllers.controller('songController', ['$scope', 'CommonData','Vai' , funct
          language: 'English',
          record_label: '',
        };
-    $scope.song.saved = false; 
+    $scope.realobj = {}
     $scope.add = function(){
-      Vai.post_song($scope.song)
+	$scope.realobj.fields = $scope.song; 
+	$scope.realobj.model = "gvai.song";
+
+      Vai.post_song($scope.realobj)
       .success(function(data){
-            $scope.song = {};
-        })
+		
+            $scope.realpbj = {};
+	   $window.location.reload();       
+ })
       .then(function(){
 
       });

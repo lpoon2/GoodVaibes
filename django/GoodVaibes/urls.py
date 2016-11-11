@@ -25,9 +25,11 @@ from django.views.generic import RedirectView
 import gvai
 urlpatterns = [
    url(r'^admin/', admin.site.urls),
-   url(r'^$', include("gvai.urls")),
-  # url(r'^', include(router.urls)), 
-   url(r'^songs', views.SongViewSet.as_view()), 
+   #url(r'^$', RedirectView.as_view(url='songs/')),
+   url(r'^$', views.IndexView.as_view(),name='index'),
+   url(r'^songs/', include("gvai.urls")), 
+# url(r'^', include(router.urls)), 
+   url(r'^api/songs', views.SongViewSet.as_view()), 
   # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 #v1_api.urls = patterns('',)
 ]
