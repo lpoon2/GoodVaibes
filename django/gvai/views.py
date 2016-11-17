@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 from gvai.models import Song
 from django.http import JsonResponse
-from rest_framework import viewsets
+#from rest_framework import viewsets
 from gvai.serializers import SongSerializer
 from django.http import Http404
 from django.views import View
