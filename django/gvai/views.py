@@ -11,7 +11,7 @@ class AlbumViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows Albums to be viewed or edited.
 	"""
-	queryset = Album.objects.all()
+	queryset = Albums.objects.all()
 	serializer_class = AlbumSerializer
 
 	class Meta:
@@ -24,7 +24,7 @@ class ArtistViewSet(viewsets.ModelViewSet):
 	API endpoint that allows Artists to be viewed or edited.
 	"""
 
-	queryset = Artist.objects.all()
+	queryset = Artists.objects.all()
 	serializer_class = ArtistSerializer
 
 	class Meta:
@@ -37,7 +37,7 @@ class SongViewSet(viewsets.ModelViewSet):
 	API endpoint that allows Songs to be viewed or edited.
 	"""
 
-	queryset = Song.objects.all()
+	queryset = Songs.objects.all()
 	serializer_class = SongSerializer
 
 	class Meta:
