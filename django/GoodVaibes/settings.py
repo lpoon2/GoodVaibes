@@ -63,7 +63,7 @@ ROOT_URLCONF = 'GoodVaibes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/lpoon2/GoodVaibes/django/'],
+        'DIRS': ['/home/vpahwa2/GoodVaibes/django/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
