@@ -6,13 +6,12 @@ from django.db import models
 
 
 class Albums(models.Model):
-    num_tracks = models.IntegerField()
-    genres = models.TextField()
-    release_date = models.TextField()
+    title = models.CharField(max_length=50)
+    genre = models.TextField()
     album_id = models.IntegerField(primary_key=True)
-    popularity = models.IntegerField()
-    record_label = models.TextField()
-    title = models.TextField()
+    artist = models.CharField(max_length=50)
+    label = models.CharField(max_length=50)
+    length = models.CharField(max_length=50)
 
     class Meta:
         managed = False
@@ -31,12 +30,12 @@ class Artists(models.Model):
 
 
 class Songs(models.Model):
-    title = models.CharField(max_length=11)
+    title = models.CharField(max_length=50)
     song_id = models.IntegerField(primary_key=True)
-    genre = models.CharField(max_length=11)
-    record_label = models.CharField(max_length=11)
-    album = models.CharField(max_length=11)
-    artist = models.CharField(max_length=11)
+    genre = models.CharField(max_length=50)
+    record_label = models.CharField(max_length=50)
+    album = models.CharField(max_length=50)
+    artist = models.CharField(max_length=50)
 
     class Meta:
         managed = False
