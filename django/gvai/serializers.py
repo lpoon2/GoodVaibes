@@ -1,4 +1,4 @@
-from gvai.models import Album, Artist, Song
+from gvai.models import Albums, Artists, Songs
 from rest_framework import serializers
 
 
