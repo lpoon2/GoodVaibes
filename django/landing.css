@@ -1,7 +1,12 @@
-.main {
-	position: center;
-	text-align: center;
-	font-size: 16;
+.index {
+
+	padding: 2em;
+
+	main {
+		position: center;
+		text-align: center;
+		font-size: 16;
+	}
 
 	.heading {
 		margin-top: 50px;
