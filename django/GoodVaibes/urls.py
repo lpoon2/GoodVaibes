@@ -19,9 +19,9 @@ from rest_framework import routers
 from gvai import views
 
 router = routers.DefaultRouter()
-router.register('album', views.AlbumViewSet)
-router.register('artist', views.ArtistViewSet)
-router.register('song', views.SongViewSet)
+router.register('Album', views.AlbumViewSet)
+router.register('Artist', views.ArtistViewSet)
+router.register('Song', views.SongViewSet)
 
 # Wire up API using automatic URL routing, include login URLS for the browsable API
 
