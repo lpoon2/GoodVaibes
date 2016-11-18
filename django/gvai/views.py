@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from gvai.models import Album, Artist, Song
+from gvai.models import Albums, Artists, Songs
 from rest_framework import viewsets
 from gvai.serializers import AlbumSerializer, ArtistSerializer, SongSerializer
 
@@ -15,7 +15,7 @@ class AlbumViewSet(viewsets.ModelViewSet):
 	serializer_class = AlbumSerializer
 
 	class Meta:
-		db_table = 'Album'
+		db_table = 'Albums'
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
@@ -28,7 +28,7 @@ class ArtistViewSet(viewsets.ModelViewSet):
 	serializer_class = ArtistSerializer
 
 	class Meta:
-		db_table = 'Artist'
+		db_table = 'Artists'
 
 
 class SongViewSet(viewsets.ModelViewSet):
@@ -41,4 +41,4 @@ class SongViewSet(viewsets.ModelViewSet):
 	serializer_class = SongSerializer
 
 	class Meta:
-		db_table = 'Song'
+		db_table = 'Songs'
