@@ -20,8 +20,8 @@ class Albums(models.Model):
 
 class Artists(models.Model):
     name = models.CharField(max_length=50)
-    genre = models.CharField(max_length=11)
-    external_url = models.CharField(max_length=11, blank=True)
+    genre = models.CharField(max_length=50)
+    external_url = models.CharField(max_length=50, blank=True)
     artist_id = models.IntegerField(primary_key=True)
 
     class Meta:
