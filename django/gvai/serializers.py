@@ -5,7 +5,7 @@ from rest_framework import serializers
 class AlbumSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Albums
-		fields = ('title', 'genres', 'album_id', 'artist', 'label', 'length')
+		fields = ('title', 'genre', 'album_id', 'artist', 'label', 'length')
 
 
 class ArtistSerializer(serializers.HyperlinkedModelSerializer):
