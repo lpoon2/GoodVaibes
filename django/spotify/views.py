@@ -2,7 +2,7 @@ from django.shortcuts import render
 import base64
 import urllib2
 
-# Create your views here
+# To Do: make sure auth works + add button
 
 @staticmethod
 def loginCallback(request_handler, code):
