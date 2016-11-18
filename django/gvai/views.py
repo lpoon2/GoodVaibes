@@ -42,3 +42,5 @@ class SongViewSet(viewsets.ModelViewSet):
 
 	class Meta:
 		db_table = 'Songs'
+
+
