@@ -7,7 +7,7 @@ import urllib2
 @staticmethod
 def loginCallback(request_handler, code):
     url = 'https://accounts.spotify.com/api/token'
-    authorization = base64.standard_b64encode('7b6a8408eb3542b290236610a2cbfe2f' + ':' + '187908062662472cb11ee6031e7fb282')
+    authorization = base64.standard_b64encode('client' + ':' + 'secret')
     # format is client_id:secret_id
 
     headers = {
