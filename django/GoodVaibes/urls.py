@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 from gvai import views
+from django.views.generic import TemplateView
 #from spotify import views
 
 router = routers.DefaultRouter()
