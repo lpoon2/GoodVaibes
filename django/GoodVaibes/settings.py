@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kq!u&6ekl8xawey@##i)qt_u3%vx$yvw&665%a@jy&84zg_nf&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['fa16-cs411-25.cs.illinois.edu',]
 
