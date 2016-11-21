@@ -67,8 +67,8 @@ class BasicQuery(self, queryset):
 					(Q(artist__icontains=q) for q in query_list)) |
 				reduce(operator.and_,
 					(Q(song__icontains=q) for q in query_list))
-			)
+				)
 
-		return result
+			return result
 
 
