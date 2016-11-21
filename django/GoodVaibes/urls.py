@@ -24,7 +24,7 @@ router = routers.DefaultRouter()
 router.register('albums', views.AlbumViewSet)
 router.register('artists', views.ArtistViewSet)
 router.register('songs', views.SongViewSet)
-router.register('search', views.BasicQuery)
+router.register('search', views.BasicQuery, base_name = 'search')
 
 # Wire up API using automatic URL routing, include login URLS for the browsable API
 
