@@ -48,7 +48,7 @@ class SongViewSet(viewsets.ModelViewSet):
 		db_table = 'Songs'
 
 
-class BasicQuery(self, queryset):
+class BasicQuery(QueryListView):
 	"""
     Display an Album/Song/Artist List page filtered by the search query.
     """
