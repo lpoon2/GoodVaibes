@@ -49,8 +49,8 @@ class SongViewSet(viewsets.ModelViewSet):
 
 
 class BasicQuery(self, queryset):
-	 """
-    Display a Blog List page filtered by the search query.
+	"""
+    Display an Album/Song/Artist List page filtered by the search query.
     """
 	paginate_by = 10
 
