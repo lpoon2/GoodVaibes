@@ -57,8 +57,8 @@ class BasicQuery(self, queryset):
 	def get_queryset(self):
 		result = super(BasicQuery, self).get_queryset()
 
-    	query = self.request.GET.get('q')
-    	if query:
+		query = self.request.GET.get('q')
+		if query:
 			query_list = query.split()
 			result = result.filter(
 				reduce(operator.and_,
@@ -69,6 +69,6 @@ class BasicQuery(self, queryset):
 					(Q(song__icontains=q) for q in query_list))
 				)
 
-			return result
+		return result
 
 
