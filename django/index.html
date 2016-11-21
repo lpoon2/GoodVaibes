@@ -3,10 +3,11 @@
 	<h1 class="heading">Good Vaibes</h1>
 
 	<!--To Do: Fix the action and get/post request-->
-	<form name="search" action="../forms.py" method="get">
+	<form name="search" action="action="{% url 'db_search_list_view' %}"" method="get" accept-charset="utf-8">
 		Search for a song, artist or album here.<br>
-		<input type="text" name="query"><br>
-		<input type="submit" value="Submit"><br>
+		<input type="text" name="q"><br>
+
+		<button class="search" type="Submit"></button><br>
 
 </main>
 

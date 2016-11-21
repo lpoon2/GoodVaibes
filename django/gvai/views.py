@@ -2,6 +2,10 @@ from django.shortcuts import render
 from gvai.models import Albums, Artists, Songs
 from rest_framework import viewsets
 from gvai.serializers import AlbumSerializer, ArtistSerializer, SongSerializer
+from django.views.generic import ListView
+
+import operator
+from django.db.models import Q
 
 # Create your views here.
 
@@ -42,5 +46,29 @@ class SongViewSet(viewsets.ModelViewSet):
 
 	class Meta:
 		db_table = 'Songs'
+
+
+class BasicQuery(self, queryset):
+	 """
+    Display a Blog List page filtered by the search query.
+    """
+    paginate_by = 10
+
+    def get_queryset(self):
+        result = super(BasicQuery, self).get_queryset()
+
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.and_,
+                       (Q(album__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(artist__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                		(Q(song__icontains=q) for q in query_list))
+            )
+
+        return result
 
 
