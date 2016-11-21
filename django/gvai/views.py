@@ -49,6 +49,7 @@ class SongViewSet(viewsets.ModelViewSet):
 
 
 class BasicQuery(ListView):
+	template_name = 'gvai/index.html'
 	"""
     Display an Album/Song/Artist List page filtered by the search query.
     """
