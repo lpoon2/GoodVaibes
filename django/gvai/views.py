@@ -52,23 +52,23 @@ class BasicQuery(self, queryset):
 	 """
     Display a Blog List page filtered by the search query.
     """
-    paginate_by = 10
+	paginate_by = 10
 
-    def get_queryset(self):
-        result = super(BasicQuery, self).get_queryset()
+	def get_queryset(self):
+    	result = super(BasicQuery, self).get_queryset()
 
-        query = self.request.GET.get('q')
-        if query:
-            query_list = query.split()
-            result = result.filter(
-                reduce(operator.and_,
-                       (Q(album__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(artist__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                		(Q(song__icontains=q) for q in query_list))
-            )
+    	query = self.request.GET.get('q')
+    	if query:
+			query_list = query.split()
+			result = result.filter(
+				reduce(operator.and_,
+					(Q(album__icontains=q) for q in query_list)) |
+				reduce(operator.and_,
+					(Q(artist__icontains=q) for q in query_list)) |
+				reduce(operator.and_,
+					(Q(song__icontains=q) for q in query_list))
+			)
 
-        return result
+		return result
 
 
