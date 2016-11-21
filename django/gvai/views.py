@@ -55,7 +55,7 @@ class BasicQuery(self, queryset):
 	paginate_by = 10
 
 	def get_queryset(self):
-    	result = super(BasicQuery, self).get_queryset()
+		result = super(BasicQuery, self).get_queryset()
 
     	query = self.request.GET.get('q')
     	if query:
