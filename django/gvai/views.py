@@ -50,9 +50,10 @@ class SongViewSet(viewsets.ModelViewSet):
 
 class BasicQuery(ListView):
 	template_name = 'gvai/index.html'
+
 	"""
-    Display an Album/Song/Artist List page filtered by the search query.
-    """
+	Display an Album/Song/Artist List page filtered by the search query.
+	"""
 	paginate_by = 10
 
 	def get_queryset(self):
