@@ -1,0 +1,15 @@
+.main {
+	position: center;
+	text-align: center;
+	font-size: 16;
+
+	.heading {
+		margin-top: 50px;
+		position: center;
+		font-size: 24;
+	}
+
+	form {
+		width: 50px;
+	}
+}
