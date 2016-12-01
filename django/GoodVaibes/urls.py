@@ -31,8 +31,10 @@ router.register('songs', views.SongViewSet)
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^test/', views.getRecommend), 
     #url(r'^search', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^search', views.BasicQuery.as_view()),
+   # url(r'^search', views.BasicQuery.as_view()),
+    url(r'^search', views.BasicQuery),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     #url(r'^insights/')
 ]

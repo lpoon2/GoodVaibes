@@ -30,13 +30,21 @@ class Artists(models.Model):
 
 
 class Songs(models.Model):
-    title = models.CharField(max_length=50)
+    Title = models.CharField(max_length=50)
     song_id = models.IntegerField(primary_key=True)
-    genre = models.CharField(max_length=50)
+    Genre = models.CharField(max_length=50)
     record_label = models.CharField(max_length=50)
-    album = models.CharField(max_length=50)
-    artist = models.CharField(max_length=50)
+    Album = models.CharField(max_length=50)
+    Artist = models.CharField(max_length=50)
 
     class Meta:
         managed = False
         db_table = 'Songs'
+
+class Users(models.Model):
+    name = models.CharField(max_length=20)
+    favorite = models.CharField(max_length=50)
+    id = models.IntegerField(primary_key=True)
+    class Meta:
+        managed = False
+        db_table = 'Users'

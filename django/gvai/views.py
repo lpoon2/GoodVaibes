@@ -1,14 +1,27 @@
 from django.shortcuts import render
-from gvai.models import Albums, Artists, Songs
+from gvai.models import Albums, Artists, Songs, Users
 from rest_framework import viewsets
 from gvai.serializers import AlbumSerializer, ArtistSerializer, SongSerializer
 from django.views.generic import ListView
-
+from django.core import serializers
+from django.shortcuts import render_to_response  
 import operator
 from django.db.models import Q
 
+from itertools import chain
 # Create your views here.
-
+def getRecommend(request):
+    name = Users.objects.get(name='Larry').name.encode('ascii','ignore')
+    history = Users.objects.get(name='Larry').favorite.encode('ascii','ignore')
+    arr = history.split(',')
+    dic = {x : arr.count(x) for x in arr}
+    sort_arr = sorted(dic.items(), key=lambda x:x[1], reverse = True)
+    arr1 = set(arr)
+    queryset = Songs.objects.filter(Genre__icontains=arr[0])[:2];
+    for i in range(1,len(sort_arr)):
+        queryset = list(chain(queryset,Songs.objects.filter(Genre__icontains=arr[i])[:2]))
+    #return Response(serializers.serialize('json', queryset)) 
+    return render_to_response('test.html', { 'song_listing': queryset , 'name': name})
 
 class AlbumViewSet(viewsets.ModelViewSet):
 
@@ -46,9 +59,14 @@ class SongViewSet(viewsets.ModelViewSet):
 
 	class Meta:
 		db_table = 'Songs'
+def BasicQuery(request):
+	result = [{}]
+	if request.GET.get('q'):
+		r = request.GET.get('q')
+		result = Songs.objects.filter(Title__icontains=r) 
+	return render_to_response('index.html',{ 'result' : result } )
 
-
-class BasicQuery(ListView):
+class BasicQuery2(ListView):
 	template_name = 'gvai/index.html'
 	queryset = Songs
 

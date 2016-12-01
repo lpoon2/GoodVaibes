@@ -3,11 +3,26 @@
 	<h1 class="heading">Good Vaibes</h1>
 
 	<!--To Do: Fix the action and get/post request-->
-	<form name="search" action="/search/" method="get" accept-charset="utf-8">
+	<form name="search" action="/search/" method="Get" accept-charset="utf-8">
 		Search for a song, artist or album here.<br>
 		<input type="text" name="q"><br>
 
-		<button class="search" type="Submit"></button><br>
+		<button class="search" type="Submit">Search</button><br>
+
+{% for songs in result %}  
+
+    <h2>{{ songs.Title }}</h2>  
+
+    <ul>  
+
+      <li>Genre: {{ songs.Genre }}</li>  
+
+      <li>Artist: {{ songs.Artist }}</li>  
+      <li>Album : {{ songs.Album }} </li>
+    </ul>  
+
+{% endfor %}  
+
 
 </main>
 
