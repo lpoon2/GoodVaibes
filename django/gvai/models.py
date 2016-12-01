@@ -44,11 +44,8 @@ class Songs(models.Model):
 class Users(models.Model):
     name = models.CharField(max_length=20)
     favorite = models.CharField(max_length=50)
-<<<<<<< HEAD
     id = models.IntegerField(primary_key=True)
-=======
 
->>>>>>> 57b09bbac8b91640a1d5a1aa0bd771a0c95b7241
     class Meta:
         managed = False
         db_table = 'Users'
