@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^test/', views.getRecommend), 
     #url(r'^search', TemplateView.as_view(template_name='index.html'), name='home'),
    # url(r'^search', views.BasicQuery.as_view()),
+    url(r'^create', views.createItem), 
     url(r'^search', views.BasicQuery),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     #url(r'^insights/')

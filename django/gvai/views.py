@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response
 import operator
 from django.db.models import Q
 
+from django.http import HttpResponse
 from itertools import chain
 # Create your views here.
 def getRecommend(request):
@@ -61,10 +62,19 @@ class SongViewSet(viewsets.ModelViewSet):
 		db_table = 'Songs'
 def BasicQuery(request):
 	result = [{}]
-	if request.GET.get('q'):
+	if request.GET.get('q') and '1' in request.GET:
 		r = request.GET.get('q')
 		result = Songs.objects.filter(Title__icontains=r) 
 	return render_to_response('index.html',{ 'result' : result } )
+
+def createItem(request):
+	if request.method == "POST":
+		#song = Songs(request.POST, instance = post)
+		name = request.POST.get('name')
+		genre = request.POST.get('genre')
+		song = Songs(Title = name, Genre = genre) 
+		song.save()
+	return  render(request,'create.html', {'poll','asd'})
 
 class BasicQuery2(ListView):
 	template_name = 'gvai/index.html'
