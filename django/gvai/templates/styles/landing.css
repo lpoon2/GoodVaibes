@@ -1,0 +1,21 @@
+.index {
+
+	padding: 2em;
+
+	main {
+		position: center;
+		text-align: center;
+		font-size: 16;
+	}
+
+	.heading {
+		margin-top: 50px;
+		position: center;
+		font-size: 24;
+		color: red;
+	}
+
+	form {
+		width: 50px;
+	}
+}
