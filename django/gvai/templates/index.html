@@ -1,13 +1,17 @@
-<body>
-	<main>
 
-		<h1 class="heading">Good Vaibes</h1>
-		<link rel="stylesheet" href="/styles/landing.css">
+<head>
+	<link rel="stylesheet" href="/styles/landing.css">
+</head>
 
-		<!--To Do: Fix the action and get/post request-->
-		<form name="search" action="/search/" method="Get" accept-charset="utf-8">
-			Search for a song, artist or album here.<br>
-		<input type="text" name="q"><br>
+	<body>
+		<main>
+
+			<h1 class="heading">Good Vaibes</h1>
+
+			<!--To Do: Fix the action and get/post request-->
+			<form name="search" action="/search/" method="Get" accept-charset="utf-8">
+				Search for a song, artist or album here.<br>
+			<input type="text" name="q"><br>
 
 		<button class="search" name="1" type="Submit">Search</button><br>
 	
@@ -36,8 +40,7 @@
 {% endfor %}  
 
 
-	</main>
-</body>
+		</main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 var ul = document.getElementById('bulk');
@@ -55,3 +58,4 @@ ul.addEventListener('click', function(e) {
 });
 
 </script>
+</body>
