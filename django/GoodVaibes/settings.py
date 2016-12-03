@@ -67,7 +67,7 @@ TEMPLATE_DIRS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/lpoon2/GoodVaibes/'],
+        'DIRS': ['/home/lpoon2/GoodVaibes/django'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
