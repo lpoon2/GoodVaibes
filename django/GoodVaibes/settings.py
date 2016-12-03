@@ -60,10 +60,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'GoodVaibes.urls'
 
+TEMPLATE_DIRS = (
+        os.path.join(SETTINGS_PATH, 'templates'),
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/lpoon2/GoodVaibes/templates/'],
+        'DIRS': ['/home/lpoon2/GoodVaibes/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
