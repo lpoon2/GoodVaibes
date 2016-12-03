@@ -76,6 +76,8 @@ def createItem(request):
 		song.save()
 	return  render(request,'create.html', {'poll','asd'})
 
+
+'''
 class BasicQuery2(ListView):
 	template_name = 'gvai/index.html'
 	queryset = Songs
@@ -101,5 +103,6 @@ class BasicQuery2(ListView):
 				)
 
 		return result
+'''
 
 
