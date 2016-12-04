@@ -3,25 +3,25 @@
 	<h1 class="heading">Good Vaibes</h1>
 
 	<!--To Do: Fix the action and get/post request-->
-	<form name="search" action="/search/" method="Get" accept-charset="utf-8">
+	<form name="search" action="/search/" method="Get" accept-charset="utf-8">{% csrf_token %}
 		Search for a song, artist or album here.<br>
 		<input type="text" name="q"><br>
 
 		<button class="search" name="1" type="Submit">Search</button><br>
-	
-<form id ="create" action="/create" method="post">
+</form>	
+<form id ="create" action="/search/add" method="post" id="post-form">{% csrf_token %}
   Name:<br>
   <input type="text" name="name" >
   <br>
   Genre:<br>
-  <input type="text" name="genre">
+  <input type="text" name="g">
   <br><br>
-  <button type="submit" name="2" value="Submit">add new song</button>
+  <button onclick="add()" type="submit" name="2" value="Save">add new song</button>
 </form>
-
+<input type='hidden' name='csrfmiddlewaretoken' value='[csrf token will be here]' />
 {% for songs in result %}  
-<div id="bulk" >
-    <h2 value=" {{ songs.pk }} ">{{ songs.Title }}</h2>  
+<div id="bulk" value="{{songs.Genre}}">
+    <h2 value=" {{ songs.Genre }} ">{{ songs.Title }}</h2>  
 
     <ul id="bulk">  
 
@@ -40,15 +40,24 @@
 var ul = document.getElementById('bulk');
 
 ul.addEventListener('click', function(e) {
-    if (e.target.tagName === 'LI'){
-      alert('click on the name');
-    }
-    alert(e.target.value);  
+ 
+    alert(typeof(e.target.attributes.value.value));
     $.ajax({
-	url : "detail",
-	type : "GET",
-	data : { info : e.target.value } 
+	url : "change" ,
+	type : "PUT",
+	data : { 'genre' :  e.target.attributes.value.value } 
 	});
 });
-
+var add = function(){
+    $.ajax({
+        url : "add",
+        type : "POST",
+        data : { 'genre' : e.target.attributes.value.value, 'csrfmiddlewaretoken':  $('[name="csrfmiddlewaretoken"]').val() }
+        });
+}
+$('#post-form').on('submit', function(event){
+    event.preventDefault();
+    console.log("form submitted!")  // sanity check
+    add();
+});
 </script>

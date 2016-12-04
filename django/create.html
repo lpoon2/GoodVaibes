@@ -3,14 +3,15 @@
 
 <h1 class="heading">Good Vaibes</h1>
 
-<form id ="create" action="/create" method="post"> {% csrf_token %}
+<form id ="create" action="/songs/" method="post">{% csrf_token %}
   Name:<br>
   <input type="text" name="name" >
   <br>
   Genre:<br>
   <input type="text" name="genre">
   <br><br>
-  <button type="submit" name="2" value="Submit">add new song</button>
+  <button type="submit" name="2" value="Save">add new song</button>
 </form>
 </main>
+<script>var csrf_token = "{{ csrf_token }}";</script>
 

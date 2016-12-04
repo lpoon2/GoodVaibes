@@ -6,11 +6,30 @@ from django.views.generic import ListView
 from django.core import serializers
 from django.shortcuts import render_to_response  
 import operator
+from django.http import QueryDict
 from django.db.models import Q
-
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.template import RequestContext
 from django.http import HttpResponse
 from itertools import chain
-# Create your views here.
+from rest_framework.decorators import detail_route
+import random
+import json
+def getRandomAnswers(request):
+    # which singer sang the following song Take a Back Road
+    ran = random.sample(Songs.objects.all(), 3)
+    answer = Songs.objects.filter(Title='Take a Back Road')[0]
+    queryset = ran + [answer]
+    random.shuffle(queryset)
+    #which of the song is sang by Drake
+    ran2 = random.sample(Songs.objects.all(), 3)
+    answer2 = Songs.objects.filter(Artist='Drake')[0]
+    queryset2 = ran2 + [answer2]
+    random.shuffle(queryset2)
+    return render_to_response('quiz.html', { 'q1': queryset , 'q2': queryset2})
+
+
 def getRecommend(request):
     name = Users.objects.get(name='Larry').name.encode('ascii','ignore')
     history = Users.objects.get(name='Larry').favorite.encode('ascii','ignore')
@@ -57,9 +76,19 @@ class SongViewSet(viewsets.ModelViewSet):
 
 	queryset = Songs.objects.all()
 	serializer_class = SongSerializer
+	@detail_route(methods=['post'])
+	def createItem(self, request, pk=None):
+                s = SongSerializer(data=request.data)
+                name = request.POST.get('name')
+                genre = request.POST.get('genre')
+                song = Songs(Title = name, Genre = genre)
+                song.save()
+		s.save()
+        	return  Response(s.data, status=status.HTTP_201_CREATED)
 
 	class Meta:
 		db_table = 'Songs'
+
 def BasicQuery(request):
 	result = [{}]
 	if request.GET.get('q') and '1' in request.GET:
@@ -67,15 +96,28 @@ def BasicQuery(request):
 		result = Songs.objects.filter(Title__icontains=r) 
 	return render_to_response('index.html',{ 'result' : result } )
 
+#@csrf_protect
+@csrf_exempt
+def update_history(request):
+    person = Users.objects.get(name='Larry')  #request.GET.get('genre')
+    put = QueryDict(request.body)
+    genre = put.get('genre')
+    person.favorite = person.favorite.encode('ascii','ignore') +',' + genre #get input from template
+    person.save()
+    return render_to_response('index.html', {'result': []})
+
+@csrf_exempt
 def createItem(request):
+	song = {}
 	if request.method == "POST":
 		#song = Songs(request.POST, instance = post)
 		name = request.POST.get('name')
 		genre = request.POST.get('genre')
 		song = Songs(Title = name, Genre = genre) 
 		song.save()
-	return  render(request,'create.html', {'poll','asd'})
-
+	#RequestContext(request)	
+	return  render_to_response('index.html', {'result': [song]}  )
+	#return HttpResponse( json.dumps(song), content_type="application/json")
 class BasicQuery2(ListView):
 	template_name = 'gvai/index.html'
 	queryset = Songs

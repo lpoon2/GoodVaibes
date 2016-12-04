@@ -24,6 +24,7 @@ router = routers.DefaultRouter()
 router.register('albums', views.AlbumViewSet)
 router.register('artists', views.ArtistViewSet)
 router.register('songs', views.SongViewSet)
+#router.register('create', views.createItem)
 #router.register('search', views.BasicQuery, base_name = 'search')
 
 # Wire up API using automatic URL routing, include login URLS for the browsable API
@@ -34,7 +35,9 @@ urlpatterns = [
     url(r'^test/', views.getRecommend), 
     #url(r'^search', TemplateView.as_view(template_name='index.html'), name='home'),
    # url(r'^search', views.BasicQuery.as_view()),
-    url(r'^create', views.createItem), 
+    url(r'^quiz', views.getRandomAnswers), 
+    url(r'^search/add', views.createItem), 
+    url(r'^search/change', views.update_history),
     url(r'^search', views.BasicQuery),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     #url(r'^insights/')
