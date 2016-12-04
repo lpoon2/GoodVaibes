@@ -112,7 +112,7 @@ def createItem(request):
 	if request.method == "POST":
 		#song = Songs(request.POST, instance = post)
 		name = request.POST.get('name')
-		genre = request.POST.get('genre')
+		genre = request.POST.get('g')
 		song = Songs(Title = name, Genre = genre) 
 		song.save()
 
