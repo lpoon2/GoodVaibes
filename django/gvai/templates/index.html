@@ -1,0 +1,61 @@
+
+<head>
+	<link rel="stylesheet" href="home/lpoon2/GoodVaibes/django/templates/styles/landing.css">
+</head>
+
+	<body>
+		<main>
+
+			<h1 class="heading">Good Vaibes</h1>
+
+			<!--To Do: Fix the action and get/post request-->
+			<form name="search" action="/search/" method="Get" accept-charset="utf-8">
+				Search for a song, artist or album here.<br>
+			<input type="text" name="q"><br>
+
+		<button class="search" name="1" type="Submit">Search</button><br>
+	
+		<form id ="create" action="/create/" method="post">
+  			Name:<br>
+  		<input type="text" name="name" >
+  		<br>
+  			Genre:<br>
+  		<input type="text" name="genre">
+  		<br><br>
+  		<button type="submit" name="2" value="Submit">add new song</button>
+		</form>
+
+		{% for songs in result %}  
+		<div id="bulk" >
+    		<h2 value=" {{ songs.pk }} ">{{ songs.Title }}</h2>  
+
+    		<ul id="bulk">  
+
+      			<li>Genre: {{ songs.Genre }}</li>  
+
+      			<li>Artist: {{ songs.Artist }}</li>  
+      			<li>Album : {{ songs.Album }} </li>
+    		</ul>  
+		</div>
+{% endfor %}  
+
+
+		</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+var ul = document.getElementById('bulk');
+
+ul.addEventListener('click', function(e) {
+    if (e.target.tagName === 'LI'){
+      alert('click on the name');
+    }
+    alert(e.target.value);  
+    $.ajax({
+	url : "detail",
+	type : "GET",
+	data : { info : e.target.value } 
+	});
+});
+
+</script>
+</body>

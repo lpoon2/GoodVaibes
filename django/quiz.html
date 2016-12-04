@@ -1,0 +1,36 @@
+<main>
+<p class="question">1. Take a Back Road is sang by which of the following artist?</p>
+<ul id="answers1">
+{% for q in q1 %} 
+<input type="radio" name="q1" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Artist }}</label><br/>
+{% endfor %}
+</ul>
+<p class="question">2. Which of the following song is sang by Drake?</p>
+<ul id="answers2">
+{% for q in q2 %}
+<input type="radio" name="q2" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Title }}</label><br/>
+{% endfor %}
+</ul>
+<p class="question">3. What is the answer to this question?</p>
+<ul class="answers">
+<input type="radio" name="q1" value="a" id="q1a"><label for="q1e">Answer 1</label><br/>
+<input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Answer 2</label><br/>
+<input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Answer 3</label><br/>
+<input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Answer 4</label><br/>
+</ul>
+<button onclick="score()">Submit</button>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+var score = function(){
+var s = 0;
+var id= $('input[name=q1]:checked').attr('id');
+var text= $('label[for='+id+']').text();
+if (text==="Rodney Atkins") s += 50; 
+id= $('input[name=q2]:checked').attr('id');
+text= $('label[for='+id+']').text();
+if (text==="0 to 100 / The Catch Up") s += 50;
+alert(s);
+}
+
+</script> 

@@ -115,9 +115,14 @@ def createItem(request):
 		genre = request.POST.get('genre')
 		song = Songs(Title = name, Genre = genre) 
 		song.save()
+
 	#RequestContext(request)	
 	return  render_to_response('index.html', {'result': [song]}  )
 	#return HttpResponse( json.dumps(song), content_type="application/json")
+	#return  render(request,'create.html', {'poll','asd'})
+
+
+
 class BasicQuery2(ListView):
 	template_name = 'gvai/index.html'
 	queryset = Songs
@@ -143,5 +148,6 @@ class BasicQuery2(ListView):
 				)
 
 		return result
+
 
 

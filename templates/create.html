@@ -1,0 +1,16 @@
+
+<main>
+
+<h1 class="heading">Good Vaibes</h1>
+
+<form id ="create" action="/create" method="post"> {% csrf_token %}
+  Name:<br>
+  <input type="text" name="name" >
+  <br>
+  Genre:<br>
+  <input type="text" name="genre">
+  <br><br>
+  <button type="submit" name="2" value="Submit">add new song</button>
+</form>
+</main>
+
