@@ -11,12 +11,11 @@
 <input type="radio" name="q2" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Title }}</label><br/>
 {% endfor %}
 </ul>
-<p class="question">3. What is the answer to this question?</p>
-<ul class="answers">
-<input type="radio" name="q1" value="a" id="q1a"><label for="q1e">Answer 1</label><br/>
-<input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Answer 2</label><br/>
-<input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Answer 3</label><br/>
-<input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Answer 4</label><br/>
+<p class="question">3. What genre does the song Fly Over States belong to?</p>
+<ul class="answers3">
+{% for q in q3 %}
+<input type="radio" name="q3" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{q.Genre}}</label><br/>
+{% endfor %} 
 </ul>
 <button onclick="score()">Submit</button>
 </main>
@@ -26,10 +25,13 @@ var score = function(){
 var s = 0;
 var id= $('input[name=q1]:checked').attr('id');
 var text= $('label[for='+id+']').text();
-if (text==="Rodney Atkins") s += 50; 
+if (text==="Rodney Atkins") s += 33; 
 id= $('input[name=q2]:checked').attr('id');
 text= $('label[for='+id+']').text();
-if (text==="0 to 100 / The Catch Up") s += 50;
+if (text==="0 to 100 / The Catch Up") s += 33;
+id= $('input[name=q3]:checked').attr('id');
+text= $('label[for='+id+']').text();
+if (text==="Country") s += 33;
 alert(s);
 }
 

@@ -27,7 +27,11 @@ def getRandomAnswers(request):
     answer2 = Songs.objects.filter(Artist='Drake')[0]
     queryset2 = ran2 + [answer2]
     random.shuffle(queryset2)
-    return render_to_response('quiz.html', { 'q1': queryset , 'q2': queryset2})
+    ran3 = random.sample(Songs.objects.all(), 3)
+    answer3 = Songs.objects.filter(Genre='Country')[0]
+    queryset3 = ran2 + [answer3]
+    random.shuffle(queryset3)
+    return render_to_response('quiz.html', { 'q1': queryset , 'q2': queryset2, 'q3': queryset3})
 
 
 def getRecommend(request):
@@ -37,10 +41,14 @@ def getRecommend(request):
     dic = {x : arr.count(x) for x in arr}
     sort_arr = sorted(dic.items(), key=lambda x:x[1], reverse = True)
     arr1 = set(arr)
-    queryset = Songs.objects.filter(Genre__icontains=arr[0])[:2];
-    for i in range(1,len(sort_arr)):
+    c = round((1/len(arr))*10)
+    queryset = Songs.objects.filter(Genre__icontains=arr[0])[:c]
+    for i in range(0,len(sort_arr)):
+	c = round((0/len(arr))*10)
         queryset = list(chain(queryset,Songs.objects.filter(Genre__icontains=arr[i])[:2]))
     #return Response(serializers.serialize('json', queryset)) 
+    #queryset =  Songs.objects.filter(Genre__icontains=arr[0])[:2]
+    random.shuffle(queryset)
     return render_to_response('test.html', { 'song_listing': queryset , 'name': name})
 
 class AlbumViewSet(viewsets.ModelViewSet):
@@ -102,22 +110,39 @@ def update_history(request):
     person = Users.objects.get(name='Larry')  #request.GET.get('genre')
     put = QueryDict(request.body)
     genre = put.get('genre')
-    person.favorite = person.favorite.encode('ascii','ignore') +',' + genre #get input from template
+    person.favorite = person.favorite.encode('ascii','ignore') +',' + genre.strip() #get input from template
     person.save()
     return render_to_response('index.html', {'result': []})
 
 @csrf_exempt
 def createItem(request):
 	song = {}
-	if request.method == "POST":
-		#song = Songs(request.POST, instance = post)
+	put = QueryDict(request.body)
+	val = request.POST.get('t')
+	if request.method == "POST" and val == "s":
+#song = Songs(request.POST, instance = post)
 		name = request.POST.get('name')
 		genre = request.POST.get('g')
-		song = Songs(Title = name, Genre = genre) 
+		art = request.POST.get('art')
+                alb = request.POST.get('alb') 
+                song = Songs(Title = name, Genre = genre, Artist = art, Album = alb)		 
 		song.save()
-
+	if request.method == "POST" and val == "ar":
+		name = request.POST.get('name')
+                genre = request.POST.get('g')
+                art = request.POST.get('art')
+                song = Artists(name = name, genre = genre, external_url = art)
+                song.save()
+	if request.method == "POST" and val == "al":
+                #song = Songs(request.POST, instance = post)
+                name = request.POST.get('name')
+                genre = request.POST.get('g')
+                art = request.POST.get('art')
+                alb = request.POST.get('alb')
+                song = Albums(Title = name, Genre = genre, Artist = art, Label =alb )
+                song.save()
 	#RequestContext(request)	
-	return  render_to_response('index.html', {'result': [song]}  )
+	return  render_to_response('index.html', {'result': [song]})
 	#return HttpResponse( json.dumps(song), content_type="application/json")
 	#return  render(request,'create.html', {'poll','asd'})
 

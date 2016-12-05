@@ -1,47 +1,112 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+#content{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    //remove this line
+    width: 400px;
+    min-height: 100px;
+    margin-top :200px;
+}
+*{
+margin-left : 5; 
+}
+</style>
 <main>
-
+<nav class="navbar navbar-default navbar-fixed-top">
 	<h1 class="heading">Good Vaibes</h1>
-
+</nav>
 	<!--To Do: Fix the action and get/post request-->
+<div id="content">
+<div class="input-group center-block">
 	<form name="search" action="/search/" method="Get" accept-charset="utf-8">{% csrf_token %}
-		Search for a song, artist or album here.<br>
-		<input type="text" name="q"><br>
-
-		<button class="search" name="1" type="Submit">Search</button><br>
+		<h4 class="text-center">Search for a song, artist or album here.</h4><br>
+		<input type="text" class="form-control" placeholder="Search for..." name="q"><br>
+	
+		<button class="search btn btn-default center-block" name="1" type="Submit">Search</button><br>
 </form>	
+ </div>
+<div class="input-group" style="margin-left=20px">
 <form id ="create" action="/search/add" method="post" id="post-form">{% csrf_token %}
-  Name:<br>
-  <input type="text" name="name" >
+  <label id="f1">Title:</label><br>
+  <input type="text" class="form-control" name="name" >
   <br>
-  Genre:<br>
-  <input type="text" name="g">
-  <br><br>
-  <button onclick="add()" type="submit" name="2" value="Save">add new song</button>
+  <label id="f2">Genre:</label><br>
+  <input type="text" class="form-control" name="g">
+  <br>
+  <label id="f3">Artist:</label><br>
+  <input type="text" class="form-control" name="art" >
+  <br>
+  <label id="f4">Album:</label><br>
+  <input type="text" class="form-control" name="alb" >
+  <br>
+<br>
+  <select onchange="changeLabels()" id="type" name="t">
+  <option value="s">Song</option>
+  <option value="ar">Artist</option>
+  <option value="al">Album</option>
+</select>
+
+  <button onclick="add()" type="submit" class="btn-primary" name="2" value="Save">add new song</button>
+	
 </form>
+</div>
 <input type='hidden' name='csrfmiddlewaretoken' value='[csrf token will be here]' />
+<div class="btn-group" role="group" aria-label="...">
+<button type="button" class="btn btn-default"><a href="/test" name="4" type="Submit">Get recommendation!</a></button>
+<button type="button" class="btn btn-default"><a href="/quiz" name="5" type="Submit">Take a quiz</a></button>
+</div>
+<br>
+<div class="list-group">
+  <a href="#" class="list-group-item active">Songs</a>
 {% for songs in result %}  
 <div id="bulk" value="{{songs.Genre}}">
     <h2 value=" {{ songs.Genre }} ">{{ songs.Title }}</h2>  
 
-    <ul id="bulk">  
+    <div id="bulk">  
 
-      <li>Genre: {{ songs.Genre }}</li>  
+      <p>Genre: {{ songs.Genre }}</p>  
 
-      <li>Artist: {{ songs.Artist }}</li>  
-      <li>Album : {{ songs.Album }} </li>
-    </ul>  
+      <p>Artist: {{ songs.Artist }}</p>  
+      <p>Album : {{ songs.Album }} </p>
+    </div>  
 </div>
 {% endfor %}  
-
-
+</div>
+</div>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
+var changeLabels = function(){
+var type = document.getElementById("type").value;
+	
+	if(type ==='ar'){
+		document.getElementById("f1").innerHTML = "Name :"; 
+		document.getElementById("f2").innerHTML = "Genre :";
+		document.getElementById("f3").innerHTML = "URL :";
+		document.getElementById("f4").innerHTML = "Album :";
+	}
+	if(type ==='al'){
+                document.getElementById("f1").innerHTML = "Title :";
+                document.getElementById("f2").innerHTML = "Genre :";
+                document.getElementById("f3").innerHTML = "Artist(s) :";
+                document.getElementById("f4").innerHTML = "Label :";
+        }
+        if(type ==='s'){
+                document.getElementById("f1").innerHTML = "Name :";
+                document.getElementById("f2").innerHTML = "Genre :";
+                document.getElementById("f3").innerHTML = "Artist :";
+                document.getElementById("f4").innerHTML = "Album :";
+        }
+}
+
 var ul = document.getElementById('bulk');
 
 ul.addEventListener('click', function(e) {
  
-    alert(typeof(e.target.attributes.value.value));
+    alert('user favorite has changed');
     $.ajax({
 	url : "change" ,
 	type : "PUT",
@@ -49,11 +114,13 @@ ul.addEventListener('click', function(e) {
 	});
 });
 var add = function(){
+    var t = document.getElementById("type").value;
+	alert(t);
     $.ajax({
         url : "add",
         type : "POST",
-        data : { 'genre' : e.target.attributes.value.value, 'csrfmiddlewaretoken':  $('[name="csrfmiddlewaretoken"]').val() }
-        });
+        data : { 't': t ,'genre' : e.target.attributes.value.value }
+    });
 }
 $('#post-form').on('submit', function(event){
     event.preventDefault();
