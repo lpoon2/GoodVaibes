@@ -2,16 +2,39 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">  
 
-  <head>  
+<style>
+#content{
+    margin-left: 20%;
+    margin-right: auto;
+    margin-bottom: 0;
+    //remove this line
+    width: 400px;
+    min-height: 100px;
+    margin-top :100px;
+} 
+</style>
+ <head>  
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
 
     <title>GoodVaibes</title>
 
   </head>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <body>  
-
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<h4 class="heading"><a href="/search">Good Vaibes</a></h4>
+</div>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="/search" name="4" type="Submit">Search</a></li>
+<li><a href="/quiz" name="5" type="Submit">Take a quiz</a></li>
+</ul>
+</div>
+</nav>
+<div id = "content">
     <h1>Recommendations for You </h1>  
 
 {% for list_dict in song_listing %}  
@@ -25,7 +48,7 @@
     </ul>  
 
 {% endfor %}  
-
+</div>
   </body>  
 
 </html>
