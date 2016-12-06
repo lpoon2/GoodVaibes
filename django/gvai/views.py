@@ -19,20 +19,25 @@ import json
 def getRandomAnswers(request):
     # which singer sang the following song Take a Back Road
     ran = random.sample(Songs.objects.all(), 3)
-    #ran_num = random.randint(0, len( Songs.objects.all()))
-    answer = Songs.objects.filter(Title='Take a Back Road')[0]
+    ran_num = random.randint(0, len( Songs.objects.all()))
+    #answer = Songs.objects.filter(Title='Take a Back Road')[0]
+    answer = Songs.objects.all()[ran_num]
     queryset = ran + [answer]
     random.shuffle(queryset)
     #which of the song is sang by Drake
     ran2 = random.sample(Songs.objects.all(), 3)
-    answer2 = Songs.objects.filter(Artist='Drake')[0]
+    ran_num = random.randint(0, len( Songs.objects.all()))
+    #answer2 = Songs.objects.filter(Artist='Drake')[0]
+    answer2 = Songs.objects.all()[ran_num]	
     queryset2 = ran2 + [answer2]
     random.shuffle(queryset2)
+    ran_num = random.randint(0, len( Songs.objects.all()))
     ran3 = random.sample(Songs.objects.all(), 3)
-    answer3 = Songs.objects.filter(Genre='Country')[0]
-    queryset3 = ran2 + [answer3]
+    #answer3 = Songs.objects.filter(Genre='Country')[0]
+    answer3 = Songs.objects.all()[ran_num]
+    queryset3 = ran3 + [answer3]
     random.shuffle(queryset3)
-    return render_to_response('quiz.html', { 'q1': queryset , 'q2': queryset2, 'q3': queryset3})
+    return render_to_response('quiz.html', { 'q1': queryset ,'a1':answer, 'q2': queryset2,'a2':answer2, 'q3': queryset3,'a3': answer3})
 
 
 def getRecommend(request):

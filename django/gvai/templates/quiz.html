@@ -1,17 +1,29 @@
+<style>
+h4{
+left : 50%; 
+transform : translateX(-50%); 
+
+}
+
+</style>
+
 <main>
-<p class="question">1. "Take a Back Road" is sang by which of the following artist?</p>
+
+<h3>How Well Do You Know Your Music?</h3>
+
+<p class="question">1."{{a1.Title}}"is sang by which of the following artist?</p>
 <ul id="answers1">
 {% for q in q1 %} 
 <input type="radio" name="q1" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Artist }}</label><br/>
 {% endfor %}
 </ul>
-<p class="question">2. Which of the following song is sang by Drake?</p>
+<p class="question">2. Which of the following song is sang by "{{a2.Artist}}"?</p>
 <ul id="answers2">
 {% for q in q2 %}
 <input type="radio" name="q2" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Title }}</label><br/>
 {% endfor %}
 </ul>
-<p class="question">3. What genre does the song "Fly Over States" belong to?</p>
+<p class="question">3. What genre does the song "{{a3.Title}}" belong to?</p>
 <ul class="answers3">
 {% for q in q3 %}
 <input type="radio" name="q3" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{q.Genre}}</label><br/>
@@ -25,14 +37,19 @@ var score = function(){
 var s = 0;
 var id= $('input[name=q1]:checked').attr('id');
 var text= $('label[for='+id+']').text();
-if (text==="Rodney Atkins") s += 33; 
+if (text==="{{a1.Artist}}") s += 1; 
 id= $('input[name=q2]:checked').attr('id');
 text= $('label[for='+id+']').text();
-if (text==="0 to 100 / The Catch Up") s += 33;
+if (text==="{{a2.Title}}") s += 1;
 id= $('input[name=q3]:checked').attr('id');
 text= $('label[for='+id+']').text();
-if (text==="Country") s += 33;
-alert(s);
+if (text==="{{a3.Genre}}") s += 1;
+if(s < 3 ){
+alert( s + '/3 Sorry! Try again' );
+}
+else{
+alert('3/3 Congrats, You Won!! ');
+}
 }
 
 </script> 
