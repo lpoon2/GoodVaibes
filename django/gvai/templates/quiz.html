@@ -1,5 +1,5 @@
 <main>
-<p class="question">1. Take a Back Road is sang by which of the following artist?</p>
+<p class="question">1. "Take a Back Road" is sang by which of the following artist?</p>
 <ul id="answers1">
 {% for q in q1 %} 
 <input type="radio" name="q1" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Artist }}</label><br/>
@@ -11,7 +11,7 @@
 <input type="radio" name="q2" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{ q.Title }}</label><br/>
 {% endfor %}
 </ul>
-<p class="question">3. What genre does the song Fly Over States belong to?</p>
+<p class="question">3. What genre does the song "Fly Over States" belong to?</p>
 <ul class="answers3">
 {% for q in q3 %}
 <input type="radio" name="q3" value="a" id="{{q.song_id}}"><label for="{{q.song_id}}">{{q.Genre}}</label><br/>

@@ -9,13 +9,25 @@
     min-height: 100px;
     margin-top :200px;
 }
-*{
-margin-left : 5; 
+.row a{
+width : 100% ;
+}
+#formb {
+	left : 50%;
+	transform: translateX(-50%); 
 }
 </style>
 <main>
 <nav class="navbar navbar-default navbar-fixed-top">
-	<h1 class="heading">Good Vaibes</h1>
+<div class="container-fluid">
+<div class="navbar-header">
+	<h4 class="heading">Good Vaibes</h4>
+</div>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="/test" name="4" type="Submit">Get recommendation!</a></li>
+<li><a href="/quiz" name="5" type="Submit">Take a quiz</a></li>
+</ul>
+</div>
 </nav>
 	<!--To Do: Fix the action and get/post request-->
 <div id="content">
@@ -27,7 +39,7 @@ margin-left : 5;
 		<button class="search btn btn-default center-block" name="1" type="Submit">Search</button><br>
 </form>	
  </div>
-<div class="input-group" style="margin-left=20px">
+<div id="formb" class="input-group" style="margin-left=20px">
 <form id ="create" action="/search/add" method="post" id="post-form">{% csrf_token %}
   <label id="f1">Title:</label><br>
   <input type="text" class="form-control" name="name" >
@@ -48,17 +60,16 @@ margin-left : 5;
   <option value="al">Album</option>
 </select>
 
-  <button onclick="add()" type="submit" class="btn-primary" name="2" value="Save">add new song</button>
+  <button onclick="add()" type="submit" class="btn-primary" name="2" value="Save">create</button>
 	
 </form>
 </div>
 <input type='hidden' name='csrfmiddlewaretoken' value='[csrf token will be here]' />
 <div class="btn-group" role="group" aria-label="...">
-<button type="button" class="btn btn-default"><a href="/test" name="4" type="Submit">Get recommendation!</a></button>
-<button type="button" class="btn btn-default"><a href="/quiz" name="5" type="Submit">Take a quiz</a></button>
 </div>
 <br>
-<div class="list-group">
+<div class="row">
+<div class="col-md-4">
   <a href="#" class="list-group-item active">Songs</a>
 {% for songs in result %}  
 <div id="bulk" value="{{songs.Genre}}">
@@ -74,6 +85,40 @@ margin-left : 5;
 </div>
 {% endfor %}  
 </div>
+
+<div class="col-md-4">
+  <a href="#" class="list-group-item active">Artists</a>
+{% for songs in result2 %}
+<div id="bulk2">
+    <h2 value=" {{ songs.name }} ">{{ songs.name }}</h2>
+
+    <div id="bulk2">
+
+      <p>Genre: {{ songs.genre }}</p>
+      <p>Url :<a href="{{ songs.external_url }} ">{{ songs.external_url}}</a> </p>
+    </div>
+</div>
+{% endfor %}
+</div>
+<div class="col-md-4">
+  <a href="#" class="list-group-item active">Albums</a>
+{% for songs in result3 %}
+<div id="bulk3">
+    <h2 value=" {{ songs.Title }} ">{{ songs.Title }}</h2>
+
+    <div id="bulk3">
+
+      <p>Genre: {{ songs.Genre }}</p>
+      <p>Artist: {{ songs.Artist }}</p>
+      <p>Label : {{ songs.Label }} </p>
+      <p>Length : {{ songs.Length }} </p>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+
+	</div>
 </div>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

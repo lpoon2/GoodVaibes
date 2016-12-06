@@ -6,12 +6,12 @@ from django.db import models
 
 
 class Albums(models.Model):
-    title = models.CharField(max_length=50)
-    genre = models.TextField()
+    Title = models.CharField(max_length=50)
+    Genre = models.TextField()
     album_id = models.IntegerField(primary_key=True)
-    artist = models.CharField(max_length=50)
-    label = models.CharField(max_length=50)
-    length = models.CharField(max_length=50)
+    Artist = models.CharField(max_length=50)
+    Label = models.CharField(max_length=50)
+    Length = models.CharField(max_length=50)
 
     class Meta:
         managed = False

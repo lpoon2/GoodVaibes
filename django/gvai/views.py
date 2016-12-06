@@ -19,6 +19,7 @@ import json
 def getRandomAnswers(request):
     # which singer sang the following song Take a Back Road
     ran = random.sample(Songs.objects.all(), 3)
+    #ran_num = random.randint(0, len( Songs.objects.all()))
     answer = Songs.objects.filter(Title='Take a Back Road')[0]
     queryset = ran + [answer]
     random.shuffle(queryset)
@@ -43,12 +44,13 @@ def getRecommend(request):
     arr1 = set(arr)
     c = round((1/len(arr))*10)
     queryset = Songs.objects.filter(Genre__icontains=arr[0])[:c]
-    for i in range(0,len(sort_arr)):
-	c = round((0/len(arr))*10)
-        queryset = list(chain(queryset,Songs.objects.filter(Genre__icontains=arr[i])[:2]))
+    for i in range(0,len(arr)):
+	c = round((1/len(arr))*10)
+        queryset = list(chain(queryset,Songs.objects.filter(Genre__icontains=arr[i])[:4]))
     #return Response(serializers.serialize('json', queryset)) 
     #queryset =  Songs.objects.filter(Genre__icontains=arr[0])[:2]
     random.shuffle(queryset)
+    queryset = queryset[:10]
     return render_to_response('test.html', { 'song_listing': queryset , 'name': name})
 
 class AlbumViewSet(viewsets.ModelViewSet):
@@ -99,10 +101,20 @@ class SongViewSet(viewsets.ModelViewSet):
 
 def BasicQuery(request):
 	result = [{}]
+	result2 = [{}]
+	result3 = [{}]
 	if request.GET.get('q') and '1' in request.GET:
 		r = request.GET.get('q')
-		result = Songs.objects.filter(Title__icontains=r) 
-	return render_to_response('index.html',{ 'result' : result } )
+		result = Songs.objects.filter(Title__icontains=r)
+		result = list(chain(result,Songs.objects.filter(Genre__icontains=r)))
+		result = list(chain(result,Songs.objects.filter(Artist__icontains=r)))
+		result2 = Artists.objects.filter(name__icontains=r)
+		result2 = list(chain(result2,Artists.objects.filter(genre__icontains=r)))
+		result3 = Albums.objects.filter(Title__icontains=r) 
+		result3 = list(chain(result3,Albums.objects.filter(Genre__icontains=r)))
+ 		result3 = list(chain(result3,Albums.objects.filter(Artist__icontains=r)))
+		result3 = list(chain(result3,Albums.objects.filter(Label__icontains=r)))
+	return render_to_response('index.html',{ 'result' : result , 'result2': result2, 'result3': result3} )
 
 #@csrf_protect
 @csrf_exempt
@@ -110,7 +122,15 @@ def update_history(request):
     person = Users.objects.get(name='Larry')  #request.GET.get('genre')
     put = QueryDict(request.body)
     genre = put.get('genre')
-    person.favorite = person.favorite.encode('ascii','ignore') +',' + genre.strip() #get input from template
+    history = Users.objects.get(name='Larry').favorite.encode('ascii','ignore')
+    arr = history.split(',')
+    if len(arr) > 3:
+	arr.pop(len(arr)-1)
+    arr = ','.join(arr)
+    if len(person.favorite) == 0:
+	person.favorite = genre.strip() 
+    else: 		
+    	person.favorite = genre.strip() +',' + arr#get input from template
     person.save()
     return render_to_response('index.html', {'result': []})
 
