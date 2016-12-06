@@ -72,7 +72,7 @@ width : 100% ;
 <div class="col-md-4">
   <a href="#" class="list-group-item active">Songs</a>
 {% for songs in result %}  
-<div id="bulk" value="{{songs.Genre}}">
+<div class="bulk" value="{{songs.Genre}}">
     <h2 value=" {{ songs.Genre }} ">{{ songs.Title }}</h2>  
 
     <div id="bulk">  
@@ -89,10 +89,10 @@ width : 100% ;
 <div class="col-md-4">
   <a href="#" class="list-group-item active">Artists</a>
 {% for songs in result2 %}
-<div id="bulk2">
-    <h2 value=" {{ songs.name }} ">{{ songs.name }}</h2>
+<div class="bulk">
+    <h2 value=" {{ songs.genre }} ">{{ songs.name }}</h2>
 
-    <div id="bulk2">
+    <div id="bulk">
 
       <p>Genre: {{ songs.genre }}</p>
       <p>Url :<a href="{{ songs.external_url }} ">{{ songs.external_url}}</a> </p>
@@ -103,10 +103,10 @@ width : 100% ;
 <div class="col-md-4">
   <a href="#" class="list-group-item active">Albums</a>
 {% for songs in result3 %}
-<div id="bulk3">
-    <h2 value=" {{ songs.Title }} ">{{ songs.Title }}</h2>
+<div class="bulk">
+    <h2 value=" {{ songs.Genre }} ">{{ songs.Title }}</h2>
 
-    <div id="bulk3">
+    <div id="bulk">
 
       <p>Genre: {{ songs.Genre }}</p>
       <p>Artist: {{ songs.Artist }}</p>
@@ -124,6 +124,22 @@ width : 100% ;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
+    window.onload = function() {
+        var anchors = document.getElementsByClassName('bulk');
+        for(var i = 0; i < anchors.length; i++) {
+            var anchor = anchors[i];
+            anchor.onclick = function(e) {
+        	alert("user's preference has changed!")   
+	         $.ajax({
+       			url : "change" ,
+        		type : "PUT",
+       			data : { 'genre' :  e.target.attributes.value.value }
+        });
+            }
+        }
+    }
+
+
 var changeLabels = function(){
 var type = document.getElementById("type").value;
 	
@@ -147,7 +163,7 @@ var type = document.getElementById("type").value;
         }
 }
 
-var ul = document.getElementById('bulk');
+var ul = document.getElementsByClassName('bulk');
 
 ul.addEventListener('click', function(e) {
  
